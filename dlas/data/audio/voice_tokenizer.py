@@ -81,8 +81,11 @@ class VoiceBpeTokenizer:
             results = kks.convert(txt)
             txt = " ".join([result['kana'] for result in results])
             txt = basic_cleaners(txt)
-        else:
+        elif self.language == "en":
             txt = english_cleaners(txt)
+        else:
+            # enables training other languages possibly
+            txt = basic_cleaners(txt)
 
         return txt
 
