@@ -301,7 +301,7 @@ class ExtensibleTrainer(BaseModel):
                     for p in net.parameters():
                         do_not_train_flag = hasattr(p, "DO_NOT_TRAIN") or (
                             hasattr(p, "DO_NOT_TRAIN_UNTIL") and it < p.DO_NOT_TRAIN_UNTIL)
-                        if p.dtype != torch.int64 and p.dtype != torch.bool and not do_not_train_flag:
+                        if p.dtype != torch.int64 and p.dtype != torch.bool and not do_not_train_flag and p.requires_grad:
                             p.requires_grad = net_enabled
                         else:
                             p.requires_grad = False
